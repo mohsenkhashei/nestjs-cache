@@ -1,15 +1,19 @@
+import { redisStore } from 'cache-manager-redis-store';
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
+import { AppService } from './app.service';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
     CacheModule.register({
+      store: redisStore,
+      host: 'localhost',
+      port: 6379,
       // ttl: 60, last for
       // max: 1000, items before cache empties
-      isGlobal: true,
+      // isGlobal: true,
     }),
   ],
 
